@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:expense_tracker_project/widgets/user_transaction.dart';
+import 'package:flutter/services.dart';
 
 class NewTransaction extends StatelessWidget {
   final titleController = TextEditingController();
@@ -20,12 +21,12 @@ class NewTransaction extends StatelessWidget {
             TextField(
               decoration: InputDecoration(labelText: 'Title'),
               controller: titleController,
-              // onChanged: (value) => titleInput = value),
             ),
             TextField(
               decoration: InputDecoration(labelText: 'Amount'),
               controller: amountController,
-              // onChanged: (value) => amountInput = value),
+              keyboardType: TextInputType.number,
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             ),
             FlatButton(
               onPressed: () => addTransaction(

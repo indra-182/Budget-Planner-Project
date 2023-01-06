@@ -18,7 +18,23 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Budget Planner'),
+        title: Text("Budget Planner"),
+        brightness: Brightness.dark,
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        toolbarHeight: 50,
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20)),
+            gradient: LinearGradient(
+                colors: [Colors.orange, Colors.yellow],
+                begin: Alignment.bottomCenter,
+                end: Alignment.topCenter),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
