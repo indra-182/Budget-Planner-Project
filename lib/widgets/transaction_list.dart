@@ -11,51 +11,43 @@ class TransactionList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 400,
-      child: SingleChildScrollView(
-        child: Column(
-          children: transactions
-              .map(
-                (trx) => Card(
-                  child: Row(
-                    children: [
-                      Container(
-                        margin:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        decoration: BoxDecoration(
-                            color: Colors.orange,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(5.0)),
-                            border: Border.all(
-                              color: Colors.orange,
-                            )),
-                        padding: EdgeInsets.all(15),
-                        child: Text(
-                          'Rp ${trx.amount}',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                              color: Colors.white),
-                        ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            trx.title,
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            DateFormat.yMMMd().format(trx.date),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+      child: ListView.builder(
+        itemBuilder: (context, index) => Card(
+          child: Row(
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                decoration: BoxDecoration(
+                    color: Colors.orange,
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    border: Border.all(
+                      color: Colors.orange,
+                    )),
+                padding: EdgeInsets.all(15),
+                child: Text(
+                  'Rp ${transactions[index].amount}',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Colors.white),
                 ),
-              )
-              .toList(),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    transactions[index].title,
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    DateFormat.yMMMd().format(transactions[index].date),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
+        itemCount: transactions.length,
       ),
     );
   }
