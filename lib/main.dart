@@ -1,5 +1,8 @@
-import 'package:expense_tracker_project/widgets/user_transaction.dart';
+import 'package:expense_tracker_project/models/transaction.dart';
+import 'package:expense_tracker_project/widgets/new_transaction.dart';
+import 'package:expense_tracker_project/widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,15 +16,58 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final List<Transaction> _transactionList = [
+    Transaction(
+      id: "id1",
+      title: "Pay Rent",
+      amount: 800000,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: "id2",
+      title: "Pet Food",
+      amount: 250000,
+      date: DateTime.now(),
+    ),
+  ];
+
+  void _addNewTransaction(String title, num amount) {
+    final newTransaction = Transaction(
+        id: Uuid().v4(), title: title, amount: amount, date: DateTime.now());
+
+    setState(() {
+      _transactionList.add(newTransaction);
+    });
+  }
+
+  void _startAddNewTransaction(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (_) {
+        return NewTransaction(_addNewTransaction);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Budget Planner"),
-        brightness: Brightness.dark,
+        actions: [
+          IconButton(
+            onPressed: () => _startAddNewTransaction(context),
+            icon: Icon(Icons.add),
+          ),
+        ],
         backgroundColor: Colors.transparent,
-        elevation: 0.0,
+        elevation: 0,
         toolbarHeight: 50,
         centerTitle: true,
         flexibleSpace: Container(
@@ -51,10 +97,16 @@ class MyHomePage extends StatelessWidget {
                 elevation: 5,
               ),
             ),
-            UserTransaction(),
+            TransactionList(_transactionList),
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () => _startAddNewTransaction(context),
+        backgroundColor: Colors.orange,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

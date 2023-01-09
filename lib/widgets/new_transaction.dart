@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:expense_tracker_project/widgets/user_transaction.dart';
 import 'package:flutter/services.dart';
 
 class NewTransaction extends StatelessWidget {
