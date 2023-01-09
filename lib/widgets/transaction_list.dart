@@ -19,11 +19,9 @@ class TransactionList extends StatelessWidget {
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 decoration: BoxDecoration(
-                    color: Colors.orange,
+                    color: Theme.of(context).primaryColor,
                     borderRadius: BorderRadius.all(Radius.circular(5)),
-                    border: Border.all(
-                      color: Colors.orange,
-                    )),
+                    border: Border.all()),
                 padding: EdgeInsets.all(15),
                 child: Text(
                   'Rp ${transactions[index].amount}',

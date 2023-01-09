@@ -11,6 +11,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      title: 'Budget Planner',
+      theme: ThemeData(
+        primarySwatch: Colors.purple,
+        fontFamily: 'Quicksand',
+        appBarTheme: AppBarTheme(
+          titleTextStyle: TextStyle(
+              fontFamily: 'OpenSans',
+              fontSize: 20,
+              fontWeight: FontWeight.bold),
+        ),
+      ),
       home: MyHomePage(),
     );
   }
@@ -23,18 +34,18 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _transactionList = [
-    Transaction(
-      id: "id1",
-      title: "Pay Rent",
-      amount: 800000,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: "id2",
-      title: "Pet Food",
-      amount: 250000,
-      date: DateTime.now(),
-    ),
+    // Transaction(
+    //   id: "id1",
+    //   title: "Pay Rent",
+    //   amount: 800000,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: "id2",
+    //   title: "Pet Food",
+    //   amount: 250000,
+    //   date: DateTime.now(),
+    // ),
   ];
 
   void _addNewTransaction(String title, num amount) {
@@ -59,7 +70,9 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Budget Planner"),
+        title: Text(
+          "Budget Planner",
+        ),
         actions: [
           IconButton(
             onPressed: () => _startAddNewTransaction(context),
@@ -73,12 +86,10 @@ class _MyHomePageState extends State<MyHomePage> {
         flexibleSpace: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(20),
-                bottomRight: Radius.circular(20)),
-            gradient: LinearGradient(
-                colors: [Colors.orange, Colors.yellow],
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter),
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20),
+            ),
+            color: Theme.of(context).primaryColor,
           ),
         ),
       ),
@@ -89,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               width: double.infinity,
               child: Card(
-                color: Colors.orange,
+                color: Theme.of(context).primaryColor,
                 child: Text(
                   'THIS IS CHART, WILL ADD LATER HEHE',
                   style: TextStyle(color: Colors.white),
@@ -104,7 +115,6 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () => _startAddNewTransaction(context),
-        backgroundColor: Colors.orange,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
