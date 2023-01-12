@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Budget Planner',
       theme: ThemeData(
-        primarySwatch: Colors.purple,
+        primarySwatch: Colors.cyan,
         fontFamily: 'Quicksand',
         appBarTheme: AppBarTheme(
           titleTextStyle: TextStyle(
@@ -48,9 +48,9 @@ class _MyHomePageState extends State<MyHomePage> {
         .toList();
   }
 
-  void _addNewTransaction(String title, num amount) {
+  void _addNewTransaction(String title, num amount, DateTime chosenDate) {
     final newTransaction = Transaction(
-        id: Uuid().v4(), title: title, amount: amount, date: DateTime.now());
+        id: Uuid().v4(), title: title, amount: amount, date: chosenDate);
 
     setState(() {
       _transactionList.add(newTransaction);
@@ -77,6 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
           IconButton(
             onPressed: () => _startAddNewTransaction(context),
             icon: Icon(Icons.add),
+            color: Colors.white,
           ),
         ],
         backgroundColor: Colors.transparent,
@@ -103,8 +104,9 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
         onPressed: () => _startAddNewTransaction(context),
+        foregroundColor: Colors.white,
+        child: Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
